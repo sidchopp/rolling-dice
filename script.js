@@ -26,6 +26,17 @@ let activePlayer = 0;
 // to store the initial score 
 let currentScore = 0;
 
+// switch to next player. 
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  // console.log(activePlayer);
+  currentScore = 0;
+  // toggle will remove a class if that class is there OR add a class if it is not there.
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+}
+
 
 // Rolling dice functionalty..
 
@@ -43,16 +54,28 @@ btnRoll.addEventListener('click', function () {
     currentScore += dice;
     document.getElementById(`current--${activePlayer}`).textContent = currentScore;
   } else {
-    // switch to next player. 
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    console.log(activePlayer);
-    currentScore = 0;
-    // toggle will remove a class if that class is there OR add a class if ot is not there.
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+    switchPlayer();
   }
 })
 
+// when hold button is clicked
+
+btnHold.addEventListener('click', function () {
+  // 1. Add current score to active player's total score
+  scores[activePlayer] += currentScore;
+  document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+
+  // 2. Check if player's score >=5: finish the game
+  if (scores[activePlayer] >= 50) {
+    document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+    document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+  } else {
+    //3. if not : switch to next player
+    switchPlayer();
+  }
+
+
+
+})
 
 
