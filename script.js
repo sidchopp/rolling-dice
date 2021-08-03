@@ -40,7 +40,7 @@ const init = function () {
   player1El.classList.remove('player--active');
 
 }
-
+// calling the function for initial state of the game
 init();
 
 // switch to next player. 
