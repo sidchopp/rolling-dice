@@ -15,18 +15,33 @@ const btnHold = document.querySelector('.btn--hold');
 // a better way to get select element by id is:
 //const score2 = document.getElementById('score--1').textContent = 0;
 
-// Starting conditions..
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-// we define an array for the total scores the first zero is for 1st player and 2nd zero is for 2nd player
-const scores = [0, 0];
-// to select which player is the active player. 
-let activePlayer = 0;
-// to store the initial score 
-let currentScore = 0;
+// to give some variables global scope, let's define them
+let scores, currentScore, activePlayer, playing;
 
-let playing = true;
+// Starting conditions..
+const init = function () {
+  // we define an array for the total scores the first zero is for 1st player and 2nd zero is for 2nd player
+  scores = [0, 0];
+  // to select which player is the active player. 
+  activePlayer = 0;
+  // to store the initial score 
+  currentScore = 0;
+  playing = true;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  // if a class is already there and we still add it, JS gives us no error and same is true for remove
+  // so these two commands below ensure that we get back to player0 as the default player to start the game
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+
+}
+
+init();
 
 // switch to next player. 
 const switchPlayer = function () {
@@ -85,5 +100,13 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+
+// resetting the game to its initial conditions when new game button is clicked
+
+btnNew.addEventListener('click', init);
+
+
+
+
 
 
