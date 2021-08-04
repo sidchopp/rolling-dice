@@ -145,8 +145,12 @@ main {
   margin-right: 0.7rem;
 }
 
+.btn--rules {
+  top: 2.5rem;
+}
+
 .btn--new {
-  top: 4rem;
+  top: 9rem;
 }
 .btn--roll {
   top: 39.3rem;
